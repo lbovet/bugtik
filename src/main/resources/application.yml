@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: bugtik
+  data:
+    rest:
+      basePath: /api
+
+server:
+  port: 8080
+
+logging:
+  level:
+    ROOT: INFO
+    #org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
+    #org.hibernate.type: TRACE
