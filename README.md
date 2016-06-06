@@ -1,6 +1,6 @@
 # bugtik
 
-Sample project using [Spring Data Rest]() and [hybind](https://github.com/lbovet/hybind).
+Sample project using [Spring Data Rest](http://projects.spring.io/spring-data-rest/) and [hybind](https://github.com/lbovet/hybind).
 This is a minimal simplistic ticket/bug tracking system.
 
 # Model
