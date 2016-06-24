@@ -16,6 +16,8 @@ public class Ticket {
 
 	private String summary;
 
+	private String owner;
+
 	@ManyToOne
 	private Severity severity;
 

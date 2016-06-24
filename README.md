@@ -5,7 +5,7 @@ This is a minimal simplistic ticket/bug tracking system.
 
 ## Model
 
-**Project** `1--->n` **Ticket** `n--->1` **Severity**
+**Project** `1--->n` **Ticket** `n--->1` **Severity** `n--->1` **Color**
 
 ## Build and Run
 

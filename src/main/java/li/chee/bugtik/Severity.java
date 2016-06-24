@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Data
 @Entity
@@ -11,12 +12,13 @@ public class Severity {
     @Id
     private String name;
 
-    private String color;
+    @ManyToOne
+    private Color color;
 
     protected Severity() {
     }
 
-    public Severity(String name, String color) {
+    public Severity(String name, Color color) {
         this.name = name;
         this.color = color;
     }
