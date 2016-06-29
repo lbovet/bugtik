@@ -40,12 +40,12 @@ public class Application extends RepositoryRestConfigurerAdapter {
         Ticket specs = new Ticket("Write specs", normal);
         specs.setOwner("me");
         Ticket bug = new Ticket("Fix build", critical);
-        specs.setOwner("other");
+        bug.setOwner("other");
         ticketRepository.save(Arrays.asList(specs, bug));
         Project project = new Project("hybind");
         project.setTickets(Arrays.asList(specs, bug));
         projectRepository.save(project);
-        projectRepository.save(new Project("bugtick"));
+        projectRepository.save(new Project("bugtik"));
     }
 
     @RequestMapping("/")
@@ -59,7 +59,3 @@ public class Application extends RepositoryRestConfigurerAdapter {
     }
 
 }
-
-
-
-
