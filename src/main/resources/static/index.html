@@ -3,10 +3,12 @@
 <head>
   <title>BugTik</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
   <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.css">
+  <link rel="stylesheet" href="style.css">
 </head>
-<body ng-app="BugTik" ng-cloak>
-  <div ng-controller="AppCtrl as app" layout="column" style="height:100%;" ng-cloak>
+<body ng-app="BugTik">
+  <div ng-controller="AppCtrl as app" layout="column" style="height:100%;">
     <section layout="row" flex>
       <md-sidenav
           class="md-sidenav-left"
@@ -14,27 +16,29 @@
           md-is-locked-open="true"
           md-component-id="left"
           md-disable-backdrop
-          md-whiteframe="4">
+          md-whiteframe="4"
+          ng-cloak>
         <md-toolbar class="md-theme-indigo">
           <h1 class="md-toolbar-tools">BugTik</h1>
         </md-toolbar>
-        <md-content>
+        <md-content ng-cloak>
           <md-list flex>
-            <md-list-item class="md-2-line" ng-click="app.selectMyTickets()">
+            <md-list-item class="md-2-line" ng-class="{selected: app.selectedItem=='my-tickets'}" ng-click="app.selectMyTickets()">
               <div class="md-list-item-text" layout="column">
                 <h3>My Tickets</h3>
               </div>
             </md-list-item>
             <md-divider ></md-divider>
-            <md-subheader class="md-no-sticky">Projects</md-subheader>
-            <md-list-item class="md-2-line" ng-repeat="project in app.projects" ng-click="app.selectProject(project)">
+            <md-subheader class="white">Projects</md-subheader>
+            <md-list-item class="md-2-line" ng-repeat="project in app.projects" ng-class="{selected: project==app.selectedItem}" ng-click="app.selectProject(project)">
               <div class="md-list-item-text" layout="column">
                 <h3>{{ project.name }}</h3>
               </div>
             </md-list-item>
+          </md-list>
         </md-content>
       </md-sidenav>
-      <div class="md-padding">
+      <div class="md-padding" ng-cloak>
         <div flex layout="row">
           <md-card ng-repeat="ticket in app.tickets">
             <md-card-title>
@@ -48,12 +52,12 @@
       </div>
     </section>
   </div>
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
-  <script src="https://npmcdn.com/hybind@1.0.1/index.js"/></script>
+  <!-- <script src="https://npmcdn.com/hybind@1.0.1/index.js"></script> -->
+  <script src="http://localhost:8000/index.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
