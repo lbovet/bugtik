@@ -9,15 +9,11 @@ angular
     self.tickets = [];   // main pane
     self.selectedItem = null;
 
-    function loadTicketData() {
-      self.tickets.forEach(function(ticket){
-        console.log(ticket);
-        ticket.$load()
-          .then(function(ticket) {
-            return ticket.$bind('severity').$load();
-          })
-          .then(function(severity) {
-            return severity.$bind('color').$load();
+    function showTickets(tickets) {
+      self.tickets = tickets
+      tickets.forEach(function(ticket){
+        ticket.severity.$load().then(function() {
+            ticket.severity.color.$load();
           })
       });
     }
@@ -25,15 +21,14 @@ angular
     // selects a project in the list
     self.selectProject = function(project) {
       self.selectedItem = project;
-      project.$bind('tickets', self.tickets).$load().then(loadTicketData);
+      project.$bind('tickets', []).$load().then(showTickets);
     }
 
     // search all tickets belonging to 'me'
     self.selectMyTickets = function() {
       self.selectedItem = "my-tickets";
-      var search = api.$bind('tickets/search/findByOwner', self.tickets);
-      search.$bind.self = api.$bind('tickets').$bind.self;
-      search.$load({ owner: 'me'}).then(loadTicketData);
+      var search = api.$bind('tickets/search/findByOwner', []);
+      search.$load({ owner: 'me'}).then(showTickets);
     }
 
     // initialize
