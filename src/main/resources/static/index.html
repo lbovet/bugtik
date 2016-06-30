@@ -11,10 +11,7 @@
 <body ng-app="BugTik">
   <div ng-controller="AppCtrl as app" layout="column" style="height:100%;">
     <section layout="row" flex>
-      <md-sidenav
-          class="md-sidenav-left"
-          md-is-open="true"
-          md-is-locked-open="true"
+      <md-sidenav class="md-sidenav-left" md-is-open="true" md-is-locked-open="true"
           md-component-id="left"
           md-disable-backdrop
           md-whiteframe="4"
@@ -66,7 +63,7 @@
                 <div layout-gt-sm="row">
                   <md-input-container class="compact">
                     <md-icon class="material-icons icon" ng-style="ticket.owner=='me' && {color: 'rgba(0,0,0,0.6)'}">face</md-icon>
-                    <input ng-model="ticket.owner" aria-label="ticket owner" class="detail"
+                    <input ng-model="ticket.owner" aria-label="ticket owner" class="detail" md-select-on-focus
                            ng-keypress="app.blurOnEnter($event)"
                            ng-blur="ticket.$save()"/>
                   </md-input-container>

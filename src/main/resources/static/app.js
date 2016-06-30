@@ -54,7 +54,7 @@ angular
     // deletes a ticket
     self.deleteTicket = function(ticket) {
       ticket.$delete().then(function() {
-        self.tickets.splice(self.tickets.indexOf(ticket))
+        self.tickets.splice(self.tickets.indexOf(ticket), 1)
       });
     };
 
