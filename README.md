@@ -1,9 +1,10 @@
 # bugtik
+![https://travis-ci.org/lbovet/bugtik](https://travis-ci.org/lbovet/bugtik.svg?branch=master)
 
 Sample project using [Spring Data Rest](http://projects.spring.io/spring-data-rest/) and [hybind](https://github.com/lbovet/hybind).
 This is a minimal simplistic ticket/bug tracking system.
 
-![](https://cloud.githubusercontent.com/assets/692124/16445379/b0ffb7a8-3de2-11e6-961b-747e2b007070.png)
+![](https://cloud.githubusercontent.com/assets/692124/16505323/a7f32646-3f1c-11e6-8f96-68186032ca5f.png)
 
 ## Model
 
