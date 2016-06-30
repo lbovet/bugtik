@@ -31,8 +31,8 @@ public class Application extends RepositoryRestConfigurerAdapter {
 
     @PostConstruct
     public void createInitialData() {
-        Color red = new Color("red");
-        Color blue = new Color("blue");
+        Color red = new Color("red", "#FFCCAA");
+        Color blue = new Color("blue", "#AACCFF");
         colorRepository.save(Arrays.asList(red, blue));
         Severity critical = new Severity("critical", red);
         Severity normal = new Severity("normal", blue);
@@ -40,7 +40,7 @@ public class Application extends RepositoryRestConfigurerAdapter {
         Ticket specs = new Ticket("Write specs", normal);
         specs.setOwner("me");
         Ticket bug = new Ticket("Fix build", critical);
-        bug.setOwner("other");
+        bug.setOwner("john");
         ticketRepository.save(Arrays.asList(specs, bug));
         Project project = new Project("hybind");
         project.setTickets(Arrays.asList(specs, bug));
@@ -55,7 +55,7 @@ public class Application extends RepositoryRestConfigurerAdapter {
 
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
-        config.exposeIdsFor(Severity.class, Color.class);
+        config.exposeIdsFor(Ticket.class, Severity.class, Color.class);
     }
 
 }

@@ -18,20 +18,21 @@
           md-component-id="left"
           md-disable-backdrop
           md-whiteframe="4"
-          ng-cloak>
-        <md-toolbar class="md-theme-indigo">
+          ng-cloak
+          style="min-width: 260px; width: 260px;">
+        <md-toolbar>
           <h1 class="md-toolbar-tools">BugTik</h1>
         </md-toolbar>
         <md-content ng-cloak>
           <md-list flex>
-            <md-list-item class="md-2-line" ng-class="{selected: app.selectedItem=='my-tickets'}" ng-click="app.selectMyTickets()">
+            <md-list-item class="md-2-line" ng-class="{selected: app.selectedMenuItem=='my-tickets'}" ng-click="app.selectMyTickets()">
               <div class="md-list-item-text" layout="column">
                 <h3>My Tickets</h3>
               </div>
             </md-list-item>
             <md-divider ></md-divider>
             <md-subheader class="white">Projects</md-subheader>
-            <md-list-item class="md-2-line" ng-repeat="project in app.projects" ng-class="{selected: project==app.selectedItem}" ng-click="app.selectProject(project)">
+            <md-list-item class="md-2-line" ng-repeat="project in app.projects" ng-class="{selected: project==app.selectedMenuItem}" ng-click="app.selectProject(project)">
               <div class="md-list-item-text" layout="column">
                 <h3>{{ project.name }}</h3>
               </div>
@@ -39,13 +40,62 @@
           </md-list>
         </md-content>
       </md-sidenav>
-      <div class="md-padding" ng-cloak>
-        <div flex layout="row">
-          <md-card ng-repeat="ticket in app.tickets">
-            <md-card-title>
+      <div style="position: relative; width: 0px" ng-cloak>
+        <div id="new">
+          <md-button class="md-fab" aria-label="create ticket" ng-click="app.newTicket()" ng-show="app.selectedMenuItem.name">
+            <md-icon class="material-icons icon">create</md-icon>
+          </md-button>
+        </div>
+      </div>
+      <div class="md-padding" ng-cloak style="overflow: auto" ng-click="app.selectTicket(null)">
+        <div style="height:80px;">
+        </div>
+        <div style="float:left" ng-repeat="ticket in app.tickets">
+          <md-card ng-class="{'md-whiteframe-8dp': ticket == app.selectedTicket}" ng-click="app.selectTicket($event, ticket)">
+            <md-card-title  ng-style="ticket.severity.color && {'background-color': ticket.severity.color.code,  transition: 'background 0.4s linear' }">
               <md-card-title-text>
-                <span class="md-headline">{{ ticket.summary }}</span>
-                <span class="md-subhead">{{ ticket.owner }}</span>
+                <div layout-gt-sm="row">
+                  <div class="id">#{{ticket.id}}</div>
+                  <md-input-container class="md-block compact">
+                        <textarea class="summary" ng-model="ticket.summary" rows="4" md-select-on-focus
+                                  aria-label="ticket summary"
+                                  ng-keypress="app.blurOnEnter($event)"
+                                  ng-blur="ticket.$save()"></textarea>
+                  </md-input-container>
+                </div>
+                <div layout-gt-sm="row">
+                  <md-input-container class="compact">
+                    <md-icon class="material-icons icon" ng-style="ticket.owner=='me' && {color: 'rgba(0,0,0,0.6)'}">face</md-icon>
+                    <input ng-model="ticket.owner" aria-label="ticket owner" class="detail"
+                           ng-keypress="app.blurOnEnter($event)"
+                           ng-blur="ticket.$save()"/>
+                  </md-input-container>
+                  <md-input-container class="compact">
+                    <md-icon class="material-icons icon">flag</md-icon>
+                    <md-select placeholder="{{ticket.severity.name}}"
+                               ng-model="ticket.severity"
+                               ng-model-options="{trackBy: '$value.name'}"
+                               md-selected-text="ticket.severity.name"
+                               ng-change="app.updateSeverity(ticket)"
+                               aria-label="ticket severity"
+                               class="detail">
+                      <md-option ng-value="severity" ng-repeat="severity in app.severities">{{severity.name}}</md-option>
+                    </md-select>
+                  </md-input-container>
+                  <md-menu>
+                    <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                      <md-icon class="material-icons icon">more_vert</md-icon>
+                    </md-button>
+                    <md-menu-content width="3">
+                      <md-menu-item>
+                        <md-button ng-click="app.deleteTicket(ticket)" aria-label="delete ticket">
+                          <md-icon class="material-icons">delete</md-icon>Delete
+                        </md-button>
+                      </md-menu-item>
+                      <!-- <md-menu-divider></md-menu-divider> -->
+                    </md-menu-content>
+                  </md-menu>
+                </div>
               </md-card-title-text>
             </md-card-title>
           </md-card>
@@ -57,7 +107,8 @@
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
-  <script src="https://npmcdn.com/hybind@1.0.3/index.js"></script>
+  <!-- TODO: script src="https://npmcdn.com/hybind@1.0.3/index.js"></script> -->
+  <script src="http://localhost:8000/index.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

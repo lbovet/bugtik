@@ -5,3 +5,42 @@
 .white {
     background-color: white;
 }
+
+.summary {
+    font-size: 140%;
+}
+
+.detail {
+    font-size: 80%;
+    min-width: 100px;
+    max-width: 100px;
+}
+
+.compact {
+    margin: 0;
+}
+
+.id {
+    margin: 2px 20px 0px 8px;
+    width: 40px;
+    font-size: 140%;
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.icon {
+    margin-left:4px;
+    color: rgba(0, 0, 0, 0.2);
+}
+
+#new {
+    top: 20px;
+    left: 20px;
+    position: absolute;
+    z-index: 100;
+}
+
+:focus {outline:0;}
+
+.md-menu {
+    padding-top: 0;
+}
