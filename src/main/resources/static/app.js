@@ -5,22 +5,9 @@ angular
     var api = hybind('api'); // binds to http://localhost:8080/api
 
     // models
-    self.projects = [];  // left menu
-    self.tickets = [];   // main pane
+    self.projects = [];
+    self.tickets = [];
     self.severities = [];
-    self.selectedMenuItem = null;
-    self.selectedTicket = null;
-
-    function loadColor(severity) {
-      severity.color.$load();
-    }
-
-    function showTickets(tickets) {
-      self.tickets = tickets;
-      tickets.forEach(function(ticket){
-        ticket.severity.$load().then(loadColor);
-      });
-    }
 
     // selects a project in the list
     self.selectProject = function(project) {
@@ -39,24 +26,20 @@ angular
       api.$bind('tickets').$create().then(function(ticket) {
         self.tickets.$add(ticket);
         self.tickets.push(ticket);
-      });
-    };
+      })};
 
     // selects a ticket
     self.selectTicket = function(event, ticket) {
-      console.log(ticket);
       self.selectedTicket = ticket;
       if(event) {
         event.stopPropagation();
-      }
-    };
+      }};
 
     // deletes a ticket
     self.deleteTicket = function(ticket) {
       ticket.$delete().then(function() {
         self.tickets.splice(self.tickets.indexOf(ticket), 1)
-      });
-    };
+      })};
 
     // associate the severity resource with the ticket resource after severity change
     self.updateSeverity = function(ticket) {
@@ -68,8 +51,17 @@ angular
       if(event.keyCode == 13) {
         event.preventDefault();
         event.target.blur();
-      }
-    };
+      }};
+
+    function loadColor(severity) {
+      severity.color.$load();
+    }
+
+    function showTickets(tickets) {
+      self.tickets = tickets;
+      tickets.forEach(function(ticket){
+        ticket.severity.$load().then(loadColor);
+      })}
 
     // initialize
     api.$bind('projects', self.projects).$load();
