@@ -10,6 +10,10 @@
     font-size: 140%;
 }
 
+.input-hidden, md-select.input-hidden md-select-value {
+   border-color: rgba(0, 0, 0, 0) !important;
+}
+
 .detail {
     font-size: 80%;
     min-width: 100px;
@@ -20,23 +24,41 @@
     margin: 0;
 }
 
-.id {
+@media (min-width: 960px) {
+  .id {
     margin: 2px 20px 0px 8px;
     width: 40px;
     font-size: 140%;
+  }
+  #new {
+      top: 72px;
+      left: 220px;
+  }
+  #top-spacer {
+    height:64px;
+  }
+}
+@media (max-width: 960px) {
+  #new {
+      bottom: 20px;
+      right: 30px;
+  }
+  #bottom-spacer {
+    height:64px;
+  }
+}
+.id {
     color: rgba(0, 0, 0, 0.4);
+}
+
+#new {
+    position: fixed;
+    z-index:100;
 }
 
 .icon {
     margin-left:4px;
     color: rgba(0, 0, 0, 0.2);
-}
-
-#new {
-    top: 20px;
-    left: 20px;
-    position: absolute;
-    z-index: 100;
 }
 
 :focus {outline:0;}

@@ -1,6 +1,6 @@
 angular
   .module('BugTik', ['ngMaterial', 'hybind'])
-  .controller('AppCtrl', ['$scope', 'hybind', function ($scope, hybind) {
+  .controller('AppCtrl', ['$scope', '$mdSidenav', 'hybind', function ($scope, $mdSidenav, hybind) {
     var self = this;
     var api = hybind('api'); // binds to http://localhost:8080/api
 
@@ -8,6 +8,15 @@ angular
     self.projects = [];
     self.tickets = [];
     self.severities = [];
+
+    self.toggleMenu = function() {
+      $mdSidenav('menu').toggle();
+    }
+
+    self.clickAnywhere = function() {
+      self.selectTicket(null);
+      $mdSidenav('menu').close();
+    }
 
     // selects a project in the list
     self.selectProject = function(project) {

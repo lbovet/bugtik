@@ -10,16 +10,21 @@
 </head>
 <body ng-app="BugTik">
   <div ng-controller="AppCtrl as app" layout="column" style="height:100%;">
-    <section layout="row" flex>
-      <md-sidenav class="md-sidenav-left" md-is-open="true" md-is-locked-open="true"
-          md-component-id="left"
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+          <md-button class="md-icon-button" aria-label="Settings" hide-gt-sm ng-click="app.toggleMenu()">
+            <md-icon class="material-icons">menu</md-icon>
+          </md-button>
+          <h1 class="md-toolbar-tools"> BugTik</h1>
+      </div>
+    </md-toolbar>
+    <section layout="row" flex ng-click="app.clickAnywhere(null)">
+      <md-sidenav class="md-sidenav-left" md-is-locked-open="$mdMedia('gt-sm')"
+          md-component-id="menu"
           md-disable-backdrop
           md-whiteframe="4"
           ng-cloak
-          style="min-width: 260px; width: 260px;">
-        <md-toolbar>
-          <h1 class="md-toolbar-tools">BugTik</h1>
-        </md-toolbar>
+          style="min-width: 200px; width: 200px;">
         <md-content ng-cloak>
           <md-list flex>
             <md-list-item class="md-2-line" ng-class="{selected: app.selectedMenuItem=='my-tickets'}" ng-click="app.selectMyTickets()">
@@ -44,9 +49,8 @@
           </md-button>
         </div>
       </div>
-      <div class="md-padding" ng-cloak style="overflow: auto" ng-click="app.selectTicket(null)">
-        <div style="height:80px;">
-        </div>
+      <div class="md-padding" ng-cloak style="overflow: auto">
+        <div id="top-spacer"></div>
         <div style="float:left" ng-repeat="ticket in app.tickets">
           <md-card ng-class="{'md-whiteframe-8dp': ticket == app.selectedTicket}" ng-click="app.selectTicket($event, ticket)">
             <md-card-title  ng-style="ticket.severity.color && {'background-color': ticket.severity.color.code,  transition: 'background 0.4s linear' }">
@@ -56,14 +60,17 @@
                   <md-input-container class="md-block compact">
                         <textarea class="summary" ng-model="ticket.summary" rows="4" md-select-on-focus
                                   aria-label="ticket summary"
+                                  ng-style="ticket != app.selectedTicket && {'border-color': 'rgba(0,0,0,0)'}"
                                   ng-keypress="app.blurOnEnter($event)"
-                                  ng-blur="ticket.$save()"></textarea>
+                                  ng-blur="ticket.$save()"
+                                  ng-class="{'input-hidden': ticket != app.selectedTicket}"></textarea>
                   </md-input-container>
                 </div>
                 <div layout-gt-sm="row">
                   <md-input-container class="compact">
                     <md-icon class="material-icons icon" ng-style="ticket.owner=='me' && {color: 'rgba(0,0,0,0.6)'}">face</md-icon>
                     <input ng-model="ticket.owner" aria-label="ticket owner" class="detail" md-select-on-focus
+                           ng-class="{'input-hidden': ticket != app.selectedTicket}"
                            ng-keypress="app.blurOnEnter($event)"
                            ng-blur="ticket.$save()"/>
                   </md-input-container>
@@ -75,6 +82,7 @@
                                md-selected-text="ticket.severity.name"
                                ng-change="app.updateSeverity(ticket)"
                                aria-label="ticket severity"
+                               ng-class="{'input-hidden': ticket != app.selectedTicket}"
                                class="detail">
                       <md-option ng-value="severity" ng-repeat="severity in app.severities">{{severity.name}}</md-option>
                     </md-select>
@@ -98,6 +106,7 @@
           </md-card>
         </div>
       </div>
+      <div id="bottom-spacer"></div>
     </section>
   </div>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
