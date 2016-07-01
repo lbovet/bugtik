@@ -1,4 +1,4 @@
-# bugtik
+# BugTik
 ![https://travis-ci.org/lbovet/bugtik](https://travis-ci.org/lbovet/bugtik.svg?branch=master)
 
 Sample project using [Spring Data Rest](http://projects.spring.io/spring-data-rest/) and [hybind](https://github.com/lbovet/hybind).
