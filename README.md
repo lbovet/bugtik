@@ -6,6 +6,10 @@ This is a minimal simplistic ticket/bug tracking system.
 
 ![](https://cloud.githubusercontent.com/assets/692124/16505323/a7f32646-3f1c-11e6-8f96-68186032ca5f.png)
 
+## Demo
+
+Try the app on https://bugtik.herokuapp.com/
+
 ## Model
 
 **Project** `1--->n` **Ticket** `n--->1` **Severity** `n--->1` **Color**
