@@ -4,7 +4,7 @@
 Sample project using [Spring Data Rest](http://projects.spring.io/spring-data-rest/) and [hybind](https://github.com/lbovet/hybind).
 This is a minimal simplistic ticket/bug tracking system.
 
-![](https://cloud.githubusercontent.com/assets/692124/16505323/a7f32646-3f1c-11e6-8f96-68186032ca5f.png)
+![](https://cloud.githubusercontent.com/assets/692124/16541808/c784f8b8-408e-11e6-8f3e-c414b238c283.png)
 
 ## Demo
 
