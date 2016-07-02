@@ -31,6 +31,9 @@
 }
 
 @media (min-width: 960px) {
+  .ticket {
+    float:left;
+  }
   .id {
     padding: 4px 6px 0px 2px;
     width: 40px;
@@ -49,6 +52,7 @@
     margin-top: -20px;
     margin-left: -10px;
     font-size: 90%;
+    width: 5px;
   }
   #new {
       bottom: 20px;
@@ -56,6 +60,14 @@
   }
   #bottom-spacer {
     height:64px;
+  }
+}
+@media (max-width: 600px) {
+  .ticket, .container {
+    width: 100%;
+  }
+  .summary {
+    max-width: 100%;
   }
 }
 .id {
