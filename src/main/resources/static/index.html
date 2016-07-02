@@ -10,8 +10,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="style.css">
 </head>
-<body ng-app="BugTik" onload="window.scrollTo(0, 1);">
-  <div ng-controller="AppCtrl as app" layout="column" style="height:100%;">
+<body ng-app="BugTik" onload="setTimeout(function(){window.scrollTo(0, 1)})">
+  <div id="app" ng-controller="AppCtrl as app" layout="column">
     <md-toolbar>
       <div class="md-toolbar-tools">
           <md-button class="md-icon-button" aria-label="Settings" hide-gt-xs ng-click="app.toggleMenu()">
@@ -113,6 +113,7 @@
       <div id="bottom-spacer"></div>
     </section>
   </div>
+  <div style="height: 1px" hide-gt-xs></div>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-animate.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>

@@ -30,6 +30,10 @@
     margin: 0;
 }
 
+#app {
+  height:100%;
+}
+
 @media (min-width: 960px) {
   .ticket {
     float:left;
