@@ -46,7 +46,6 @@
 }
 @media (max-width: 960px) {
   .id {
-    position: absolute;
     margin-top: -20px;
     margin-left: -10px;
     font-size: 90%;
