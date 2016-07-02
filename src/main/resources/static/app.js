@@ -1,6 +1,6 @@
 angular
   .module('BugTik', ['ngMaterial', 'hybind'])
-  .controller('AppCtrl', ['$scope', '$mdSidenav', 'hybind', function ($scope, $mdSidenav, hybind) {
+  .controller('AppCtrl', ['$mdSidenav', 'hybind', function ($mdSidenav, hybind) {
     var self = this;
     var api = hybind('api'); // binds to http://localhost:8080/api
 
@@ -8,6 +8,8 @@ angular
     self.projects = [];
     self.tickets = [];
     self.severities = [];
+
+    var serverityCache = {}
 
     self.toggleMenu = function() {
       $mdSidenav('menu').toggle();
@@ -69,14 +71,17 @@ angular
     function showTickets(tickets) {
       self.tickets = tickets;
       tickets.forEach(function(ticket){
-        ticket.severity.$load().then(loadColor);
+        ticket.severity.$load().then(function() {
+          ticket.$share(serverityCache, 'severity');
+        });
       })}
 
     // initialize
     api.$bind('projects', self.projects).$load();
     api.$bind('severities', self.severities).$load().then(function() {
-      self.severities.forEach(loadColor);
+      self.severities.forEach(function(severity) {
+        severity.$share(serverityCache, loadColor)
+      });
+      self.selectMyTickets();
     });
-
-    self.selectMyTickets();
   }]);
