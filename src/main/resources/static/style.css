@@ -48,6 +48,9 @@
   }
 }
 @media (max-width: 960px) {
+  .ticket {
+    float:left;
+  }
   .id {
     margin-top: -20px;
     margin-left: -10px;
