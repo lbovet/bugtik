@@ -45,6 +45,12 @@
   }
 }
 @media (max-width: 960px) {
+  .id {
+    position: absolute;
+    margin-top: -20px;
+    margin-left: -10px;
+    font-size: 90%;
+  }
   #new {
       bottom: 20px;
       right: 30px;
@@ -54,10 +60,6 @@
   }
 }
 .id {
-    position: absolute;
-    margin-top: -20px;
-    margin-left: -10px;
-    font-size: 90%;
     color: rgba(0, 0, 0, 0.4);
 }
 
