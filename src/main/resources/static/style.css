@@ -8,6 +8,11 @@
 
 .summary {
     font-size: 140%;
+    max-width: 268px;
+}
+
+.md-errors-spacer {
+  min-height: 0px !important;
 }
 
 .input-hidden, md-select.input-hidden md-select-value {
@@ -16,17 +21,18 @@
 
 .detail {
     font-size: 80%;
-    min-width: 100px;
-    max-width: 100px;
+    min-width: 80px;
+    max-width: 80px;
 }
 
 .compact {
+    margin-top: 2px;
     margin: 0;
 }
 
 @media (min-width: 960px) {
   .id {
-    margin: 2px 20px 0px 8px;
+    padding: 4px 6px 0px 2px;
     width: 40px;
     font-size: 140%;
   }
@@ -48,6 +54,10 @@
   }
 }
 .id {
+    position: absolute;
+    margin-top: -20px;
+    margin-left: -10px;
+    font-size: 90%;
     color: rgba(0, 0, 0, 0.4);
 }
 

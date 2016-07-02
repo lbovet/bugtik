@@ -12,14 +12,14 @@
   <div ng-controller="AppCtrl as app" layout="column" style="height:100%;">
     <md-toolbar>
       <div class="md-toolbar-tools">
-          <md-button class="md-icon-button" aria-label="Settings" hide-gt-sm ng-click="app.toggleMenu()">
+          <md-button class="md-icon-button" aria-label="Settings" hide-gt-xs ng-click="app.toggleMenu()">
             <md-icon class="material-icons">menu</md-icon>
           </md-button>
           <h1 class="md-toolbar-tools"> BugTik</h1>
       </div>
     </md-toolbar>
     <section layout="row" flex ng-click="app.clickAnywhere(null)">
-      <md-sidenav class="md-sidenav-left" md-is-locked-open="$mdMedia('gt-sm')"
+      <md-sidenav class="md-sidenav-left" md-is-locked-open="$mdMedia('gt-xs')"
           md-component-id="menu"
           md-disable-backdrop
           md-whiteframe="4"
@@ -54,9 +54,9 @@
         <div style="float:left" ng-repeat="ticket in app.tickets">
           <md-card ng-class="{'md-whiteframe-8dp': ticket == app.selectedTicket}" ng-click="app.selectTicket($event, ticket)">
             <md-card-title  ng-style="ticket.severity.color && {'background-color': ticket.severity.color.code,  transition: 'background 0.4s linear' }">
+              <div class="id">#{{ticket.id}}</div>
               <md-card-title-text>
                 <div layout-gt-sm="row">
-                  <div class="id">#{{ticket.id}}</div>
                   <md-input-container class="md-block compact">
                         <textarea class="summary" ng-model="ticket.summary" rows="4" md-select-on-focus
                                   aria-label="ticket summary"
@@ -66,7 +66,7 @@
                                   ng-class="{'input-hidden': ticket != app.selectedTicket}"></textarea>
                   </md-input-container>
                 </div>
-                <div layout-gt-sm="row">
+                <div style="margin-top: 6px;">
                   <md-input-container class="compact">
                     <md-icon class="material-icons icon" ng-style="ticket.owner=='me' && {color: 'rgba(0,0,0,0.6)'}">face</md-icon>
                     <input ng-model="ticket.owner" aria-label="ticket owner" class="detail" md-select-on-focus
@@ -74,32 +74,34 @@
                            ng-keypress="app.blurOnEnter($event)"
                            ng-blur="ticket.$save()"/>
                   </md-input-container>
-                  <md-input-container class="compact">
-                    <md-icon class="material-icons icon">flag</md-icon>
-                    <md-select placeholder="{{ticket.severity.name}}"
-                               ng-model="ticket.severity"
-                               ng-model-options="{trackBy: '$value.name'}"
-                               md-selected-text="ticket.severity.name"
-                               ng-change="app.updateSeverity(ticket)"
-                               aria-label="ticket severity"
-                               ng-class="{'input-hidden': ticket != app.selectedTicket}"
-                               class="detail">
-                      <md-option ng-value="severity" ng-repeat="severity in app.severities">{{severity.name}}</md-option>
-                    </md-select>
-                  </md-input-container>
-                  <md-menu>
-                    <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">
-                      <md-icon class="material-icons icon">more_vert</md-icon>
-                    </md-button>
-                    <md-menu-content width="3">
-                      <md-menu-item>
-                        <md-button ng-click="app.deleteTicket(ticket)" aria-label="delete ticket">
-                          <md-icon class="material-icons">delete</md-icon>Delete
-                        </md-button>
-                      </md-menu-item>
-                      <!-- <md-menu-divider></md-menu-divider> -->
-                    </md-menu-content>
-                  </md-menu>
+                  <div style="display: inline-block; white-space: nowrap; position: relative; vertical-align: top;">
+                    <md-input-container class="compact">
+                      <md-icon class="material-icons icon">flag</md-icon>
+                      <md-select placeholder="{{ticket.severity.name}}"
+                                 ng-model="ticket.severity"
+                                 ng-model-options="{trackBy: '$value.name'}"
+                                 md-selected-text="ticket.severity.name"
+                                 ng-change="app.updateSeverity(ticket)"
+                                 aria-label="ticket severity"
+                                 ng-class="{'input-hidden': ticket != app.selectedTicket}"
+                                 class="detail">
+                        <md-option ng-value="severity" ng-repeat="severity in app.severities">{{severity.name}}</md-option>
+                      </md-select>
+                    </md-input-container>
+                    <md-menu style="display: inline">
+                      <md-button style="margin-left: -6px; margin-right: 0px; ; margin-top: -6px" aria-label="more ticket actions" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                        <md-icon class="material-icons">more_vert</md-icon>
+                      </md-button>
+                      <md-menu-content width="3">
+                        <md-menu-item>
+                          <md-button ng-click="app.deleteTicket(ticket)" aria-label="delete ticket">
+                            <md-icon class="material-icons">delete</md-icon>Delete
+                          </md-button>
+                        </md-menu-item>
+                        <!-- <md-menu-divider></md-menu-divider> -->
+                      </md-menu-content>
+                    </md-menu>
+                  </div>
                 </div>
               </md-card-title-text>
             </md-card-title>
@@ -113,7 +115,8 @@
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
-  <script src="https://npmcdn.com/hybind@1.0.4/index.js"></script>
+  <!--script src="https://npmcdn.com/hybind@1.0.4/index.js"></script-->
+  <script src="hybind.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
