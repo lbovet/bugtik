@@ -52,6 +52,22 @@ angular
         self.tickets.splice(self.tickets.indexOf(ticket), 1)
       })};
 
+    // returns all projects except the selected one
+    self.otherProjects = function() {
+      return self.projects.filter(function(project) { return project != self.selectedMenuItem });
+    };
+
+    // moves a ticket to another project
+    self.moveTicket = function(ticket, project) {
+      if(self.selectedMenuItem != "my-tickets") {
+        var pos = self.tickets.indexOf(ticket);
+        self.tickets.splice(pos,1);
+      }
+      project.$bind('tickets', []).$load().then(function(tickets) {
+        tickets.$add(ticket);
+      });
+    };
+
     // associate the severity resource with the ticket resource after severity change
     self.updateSeverity = function(ticket) {
       ticket.$bind('severity').$set();

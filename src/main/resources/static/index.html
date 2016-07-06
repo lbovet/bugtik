@@ -100,7 +100,20 @@
                             <md-icon class="material-icons">delete</md-icon>Delete
                           </md-button>
                         </md-menu-item>
-                        <!-- <md-menu-divider></md-menu-divider> -->
+                        <md-menu-divider></md-menu-divider>
+                        <md-menu-bar>
+                        <md-menu-item>
+
+                            <md-menu>
+                              <button ng-click="$mdOpenMenu()">
+                                <md-icon class="material-icons">move</md-icon>Move To...
+                              </button>
+                              <md-menu-content>
+                                <md-menu-item ng-repeat="project in app.otherProjects()"><md-button ng-click="app.moveTicket(ticket, project)">{{project.name}}</md-button></md-menu-item>
+                              </md-menu-content>
+                            </md-menu>
+                        </md-menu-item>
+                        </md-menu-bar>
                       </md-menu-content>
                     </md-menu>
                   </div>
