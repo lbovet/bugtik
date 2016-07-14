@@ -54,7 +54,7 @@
       <div class="container md-padding" ng-cloak style="overflow: auto">
         <div id="top-spacer"></div>
         <div class="ticket" ng-repeat="ticket in app.tickets">
-          <md-card ng-class="{'md-whiteframe-8dp': ticket == app.selectedTicket}" ng-click="app.selectTicket($event, ticket)">
+          <md-card ng-class="{'md-whiteframe-8dp': ticket == app.selectedTicket}" ng-click="app.selectTicket(ticket, $event)">
             <md-card-title  ng-style="ticket.severity.color && {'background-color': ticket.severity.color.code,  transition: 'background 0.4s linear' }">
               <div class="id">#{{ticket.id}}</div>
               <md-card-title-text>
@@ -83,7 +83,7 @@
                                  ng-model="ticket.severity"
                                  ng-model-options="{trackBy: '$value.name'}"
                                  md-selected-text="ticket.severity.name"
-                                 ng-change="app.updateSeverity(ticket)"
+                                 md-on-close="app.updateSeverity(ticket)"
                                  aria-label="ticket severity"
                                  ng-class="{'input-hidden': ticket != app.selectedTicket}"
                                  class="detail">
@@ -130,8 +130,8 @@
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-aria.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular-messages.min.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
-  <script src="https://npmcdn.com/hybind@1.0.5/index.js">
-  <!--script src="hybind.js"></script -->
+  <script src="https://npmcdn.com/hybind@1.0.6/index.js"></script>
+  <!--script src="hybind.js"></script-->
   <script src="app.js"></script>
 </body>
 </html>

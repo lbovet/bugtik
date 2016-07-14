@@ -9,7 +9,7 @@ angular
     self.tickets = [];
     self.severities = [];
 
-    var serverityCache = {}
+    self.severityCache = {}
 
     self.toggleMenu = function() {
       $mdSidenav('menu').toggle();
@@ -23,28 +23,27 @@ angular
     // selects a project in the list
     self.selectProject = function(project) {
       self.selectedMenuItem = project;
-      project.$bind('tickets', []).$load().then(showTickets);
+      project.$bind('tickets', []).$load({projection: 'withSeverity'}).then(showTickets);
     };
 
     // search all tickets belonging to 'me'
     self.selectMyTickets = function() {
       self.selectedMenuItem = "my-tickets";
-      api.$bind('tickets/search/findByOwner', []).$load({ owner: 'me'}).then(showTickets);
+      api.$bind('tickets/search/findByOwner', []).$load({projection: 'withSeverity', owner: 'me'}).then(showTickets);
     };
 
     // create a new ticket in the current project
     self.newTicket = function() {
       api.$bind('tickets').$create().then(function(ticket) {
-        self.tickets.$add(ticket);
-        self.tickets.push(ticket);
-      })};
+        self.tickets.$add(ticket).then(function() {
+            self.tickets.push(ticket);
+      })})};
 
     // selects a ticket
-    self.selectTicket = function(event, ticket) {
+    self.selectTicket = function(ticket, event) {
       self.selectedTicket = ticket;
-      if(event) {
-        event.stopPropagation();
-      }};
+      if(event) event.stopPropagation();
+    };
 
     // deletes a ticket
     self.deleteTicket = function(ticket) {
@@ -54,19 +53,18 @@ angular
 
     // returns all projects except the selected one
     self.otherProjects = function() {
-      return self.projects.filter(function(project) { return project != self.selectedMenuItem });
-    };
+      return self.projects.filter(function(project) {
+        return project != self.selectedMenuItem
+      });};
 
     // moves a ticket to another project
     self.moveTicket = function(ticket, project) {
       if(self.selectedMenuItem != "my-tickets") {
-        var pos = self.tickets.indexOf(ticket);
-        self.tickets.splice(pos,1);
+        self.tickets.splice(self.tickets.indexOf(ticket), 1);
       }
       project.$bind('tickets', []).$load().then(function(tickets) {
         tickets.$add(ticket);
-      });
-    };
+      });};
 
     // associate the severity resource with the ticket resource after severity change
     self.updateSeverity = function(ticket) {
@@ -80,23 +78,17 @@ angular
         event.target.blur();
       }};
 
-    function loadColor(severity) {
-      severity.color.$load();
-    }
-
     function showTickets(tickets) {
       self.tickets = tickets;
       tickets.forEach(function(ticket){
-        ticket.severity.$load().then(function() {
-          ticket.$share(serverityCache, 'severity');
-        });
+        ticket.$share(self.severityCache, 'severity');
       })}
 
     // initialize
     api.$bind('projects', self.projects).$load();
-    api.$bind('severities', self.severities).$load().then(function() {
+    api.$bind('severities', self.severities).$load({projection: 'withColor'}).then(function() {
       self.severities.forEach(function(severity) {
-        severity.$share(serverityCache, loadColor)
+        severity.$share(self.severityCache)
       });
       self.selectMyTickets();
     });

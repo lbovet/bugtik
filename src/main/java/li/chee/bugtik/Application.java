@@ -33,10 +33,11 @@ public class Application extends RepositoryRestConfigurerAdapter {
     public void createInitialData() {
         Color red = new Color("red", "#FFCCAA");
         Color blue = new Color("blue", "#AACCFF");
-        colorRepository.save(Arrays.asList(red, blue));
+        Color grey = new Color("grey", "#CCCCCC");
+        colorRepository.save(Arrays.asList(red, blue, grey));
         Severity critical = new Severity("critical", red);
         Severity normal = new Severity("normal", blue);
-        severityRepository.save(Arrays.asList(critical, normal));
+        severityRepository.save(Arrays.asList(critical, normal, new Severity("low", grey)));
         Ticket specs = new Ticket("Write specs", normal);
         specs.setOwner("me");
         Ticket bug = new Ticket("Fix build", critical);
