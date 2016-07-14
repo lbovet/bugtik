@@ -29,18 +29,32 @@
           style="min-width: 200px; width: 200px;">
         <md-content ng-cloak>
           <md-list flex>
-            <md-list-item class="md-2-line" ng-class="{selected: app.selectedMenuItem=='my-tickets'}" ng-click="app.selectMyTickets()">
+            <md-list-item ng-class="{selected: app.selectedMenuItem=='my-tickets'}" ng-click="app.selectMyTickets()">
               <div class="md-list-item-text" layout="column">
-                <h3>My Tickets</h3>
+                My Tickets
               </div>
             </md-list-item>
             <md-divider ></md-divider>
             <md-subheader class="white">Projects</md-subheader>
-            <md-list-item class="md-2-line" ng-repeat="project in app.projects" ng-class="{selected: project==app.selectedMenuItem}" ng-click="app.selectProject(project)">
+            <md-list-item ng-repeat="project in app.projects" ng-class="{selected: project==app.selectedMenuItem}" ng-click="app.selectProject(project)">
               <div class="md-list-item-text" layout="column">
-                <h3>{{ project.name }}</h3>
+                {{ project.name }}
               </div>
             </md-list-item>
+            <md-divider ></md-divider>
+            <md-subheader class="white">Severities</md-subheader>
+            <md-menu ng-repeat="severity in app.severities | orderBy : 'name'">
+              <md-list-item ng-click="$mdOpenMenu()" class="colored">
+                <div class="md-list-item-text" layout="row">
+                  <md-icon class="material-icons icon" ng-style="{ color: severity.color.code}">lens</md-icon>{{ severity.name }}
+                </div>
+              </md-list-item>
+              <md-menu-content>
+                <md-menu-item ng-repeat="color in app.colors | orderBy : 'name'">
+                  <md-button ng-click="app.setColor(severity, color)">{{color.name}}</md-button>
+                </md-menu-item>
+              </md-menu-content>
+            </md-menu>
           </md-list>
         </md-content>
       </md-sidenav>
@@ -87,7 +101,7 @@
                                  aria-label="ticket severity"
                                  ng-class="{'input-hidden': ticket != app.selectedTicket}"
                                  class="detail">
-                        <md-option ng-value="severity" ng-repeat="severity in app.severities">{{severity.name}}</md-option>
+                        <md-option ng-value="severity" ng-repeat="severity in app.severities | orderBy : 'name'">{{severity.name}}</md-option>
                       </md-select>
                     </md-input-container>
                     <md-menu style="display: inline">
@@ -103,7 +117,6 @@
                         <md-menu-divider></md-menu-divider>
                         <md-menu-bar>
                         <md-menu-item>
-
                             <md-menu>
                               <button ng-click="$mdOpenMenu()">
                                 <md-icon class="material-icons">move</md-icon>Move To...

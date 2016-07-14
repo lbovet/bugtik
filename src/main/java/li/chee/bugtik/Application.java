@@ -33,8 +33,9 @@ public class Application extends RepositoryRestConfigurerAdapter {
     public void createInitialData() {
         Color red = new Color("red", "#FFCCAA");
         Color blue = new Color("blue", "#AACCFF");
-        Color grey = new Color("grey", "#CCCCCC");
-        colorRepository.save(Arrays.asList(red, blue, grey));
+        Color grey = new Color("grey", "#EEEEEE");
+        Color green = new Color("green", "#AAFFCC");
+        colorRepository.save(Arrays.asList(red, blue, grey, green));
         Severity critical = new Severity("critical", red);
         Severity normal = new Severity("normal", blue);
         severityRepository.save(Arrays.asList(critical, normal, new Severity("low", grey)));

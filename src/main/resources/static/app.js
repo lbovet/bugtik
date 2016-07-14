@@ -8,6 +8,7 @@ angular
     self.projects = [];
     self.tickets = [];
     self.severities = [];
+    self.colors = [];
 
     self.severityCache = {}
 
@@ -71,6 +72,11 @@ angular
       ticket.$bind('severity').$set();
     };
 
+    // associate the color resource with the severity resource after color change
+    self.setColor = function(severity, color) {
+      severity.$bind('color', color).$set();
+    };
+
     // blurs on enter key in text fields
     self.blurOnEnter = function(event) {
       if(event.keyCode == 13) {
@@ -86,6 +92,7 @@ angular
 
     // initialize
     api.$bind('projects', self.projects).$load();
+    api.$bind('colors', self.colors).$load();
     api.$bind('severities', self.severities).$load({projection: 'withColor'}).then(function() {
       self.severities.forEach(function(severity) {
         severity.$share(self.severityCache)
