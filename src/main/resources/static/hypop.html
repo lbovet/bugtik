@@ -120,7 +120,7 @@
     }
 
     $(function() {
-        api = hybind('api');
+        api = hybind(window.location.hash.substring(1));
         api.$load().then(function() {
           render();
         });

@@ -43,7 +43,7 @@
               </div>
             </md-list-item>
             <md-divider ></md-divider>
-            <md-subheader class="white">Severities</md-subheader>
+            <md-subheader class="white">Severity Colors</md-subheader>
             <md-menu ng-repeat="severity in app.severities | orderBy : 'name'">
               <md-list-item ng-click="$mdOpenMenu()" class="colored">
                 <div class="md-list-item-text" layout="row">
@@ -56,6 +56,14 @@
                 </md-menu-item>
               </md-menu-content>
             </md-menu>
+            <md-divider ></md-divider>
+            <md-subheader class="white">API Tools</md-subheader>
+            <md-list-item>
+              <a href="api" target="_blank">HAL Browser</a>
+            </md-list-item>
+            <md-list-item>
+              <a href="hypop.html#api" target="_blank">hypop</a>
+            </md-list-item>
           </md-list>
         </md-content>
       </md-sidenav>
