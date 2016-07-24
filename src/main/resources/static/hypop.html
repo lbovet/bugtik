@@ -45,6 +45,7 @@
           if(obj.$load) {
             label.css('font-weight', 'bold');
             label.css('cursor', 'pointer');
+            label.css('user-select', 'none');
             label.click(function() {
               console.log(obj.$bind.loaded)
               if(!obj.$bind.loaded) {
