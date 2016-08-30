@@ -87,7 +87,7 @@ angular
     function showTickets(tickets) {
       self.tickets = tickets;
       tickets.forEach(function(ticket){
-        ticket.$share(self.severityCache, 'severity');
+        ticket.$share('severity', self.severityCache);
       })}
 
     // initialize
