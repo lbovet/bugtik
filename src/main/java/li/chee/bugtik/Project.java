@@ -17,7 +17,7 @@ public class Project {
     private String name;
 
     @OneToMany(cascade = CascadeType.REMOVE)
-    @JoinTable
+    @JoinColumn
     private List<Ticket> tickets;
 
     protected Project() {
