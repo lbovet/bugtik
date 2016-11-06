@@ -78,7 +78,7 @@
                 box.addClass("prettyson-sep");
             }
             var firstNow = true;
-            if(Array.isArray(obj)) {
+            if(obj instanceof Array) {
               $.each(obj, function(k,v) {
                 prettyson(element, v, depth+1, null, true, false, obj);
                 firstNow = false;
